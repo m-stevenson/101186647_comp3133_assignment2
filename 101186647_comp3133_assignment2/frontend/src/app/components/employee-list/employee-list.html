@@ -1,1 +1,66 @@
-<p>employee-list works!</p>
+<div class="page">
+  <div class="toolbar">
+    <h2>Employee List</h2>
+
+    <div class="toolbar-actions">
+      <a class="btn primary" routerLink="/employees/add"> + Add Employee</a>
+      <a class="btn delete" (click)="logout()">Logout</a>
+    </div>
+  </div>
+
+  <div class="search-bar">
+    <input [(ngModel)]="designation" type="text" placeholder="Search by designation" />
+    <input [(ngModel)]="department" type="text" placeholder="Search by department" />
+
+    <button class="btn primary" (click)="onSearch()">Search</button>
+    <button class="btn secondary" (click)="clearSearch()">Clear</button>
+  </div>
+
+  <p *ngIf="loading">Loading...</p>
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+  <div class="table-wrapper" *ngIf="!loading && employees.length > 0">
+    <table>
+      <thead>
+        <tr>
+          <th>Photo</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Gender</th>
+          <th>Designation</th>
+          <th>Department</th>
+          <th>Salary</th>
+          <th>Date Joined</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let emp of employees">
+          <td>
+            <img
+              *ngIf="emp.employee_photo; else noPhoto"
+              [src]="emp.employee_photo"
+              alt="Employee photo"
+              class="thumb"
+            />
+            <ng-template #noPhoto>N/A</ng-template>
+          </td>
+          <td>{{ emp.first_name }} {{ emp.last_name }}</td>
+          <td>{{ emp.email }}</td>
+          <td>{{ emp.gender || 'N/A' }}</td>
+          <td>{{ emp.designation }}</td>
+          <td>{{ emp.department }}</td>
+          <td>{{ emp.salary | currency }}</td>
+          <td>{{ emp.date_of_joining | date }}</td>
+          <td>
+            <a class="btn view" [routerLink]="['/employees', emp._id]">View</a>
+            <a class="btn edit" [routerLink]="['/employees/edit', emp._id]">Edit</a>
+            <a class="btn delete" (click)="onDelete(emp._id)">Delete</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p *ngIf="!loading && employees.length === 0">No employees found</p>
+</div>
