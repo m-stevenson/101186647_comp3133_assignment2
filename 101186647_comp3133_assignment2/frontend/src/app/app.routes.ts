@@ -1,34 +1,34 @@
 import { Routes } from '@angular/router';
-import { Login } from './components/login/login';
-import { Signup } from './components/signup/signup';
-import { EmployeeList } from './components/employee-list/employee-list';
-import { EmployeeForm } from './components/employee-form/employee-form';
-import { EmployeeDetails } from './components/employee-details/employee-details';
+import { LoginComponent } from './components/login/login';
+import { SignupComponent } from './components/signup/signup';
+import { EmployeeListComponent } from './components/employee-list/employee-list';
+import { EmployeeFormComponent } from './components/employee-form/employee-form';
+import { EmployeeDetailsComponent } from './components/employee-details/employee-details';
 import { tokenGuard } from './guards/token-guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login', component: Login },
-  { path: 'signup', component: Signup },
+  { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignupComponent },
 
   {
     path: 'employees',
-    component: EmployeeList,
+    component: EmployeeListComponent,
     canActivate: [tokenGuard],
   },
   {
     path: 'employees/add',
-    component: EmployeeForm,
+    component: EmployeeFormComponent,
     canActivate: [tokenGuard],
   },
   {
     path: 'employees/edit/:id',
-    component: EmployeeForm,
+    component: EmployeeFormComponent,
     canActivate: [tokenGuard],
   },
   {
     path: 'employees/:id',
-    component: EmployeeDetails,
+    component: EmployeeDetailsComponent,
     canActivate: [tokenGuard],
   },
 
