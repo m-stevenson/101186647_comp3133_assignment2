@@ -6,7 +6,7 @@ import { HttpLink } from 'apollo-angular/http';
 import { ApolloLink, InMemoryCache } from '@apollo/client/core';
 import { SetContextLink } from '@apollo/client/link/context';
 import { routes } from './app.routes';
-import { TokenService } from './services/token.service.';
+import { TokenService } from './services/token.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
