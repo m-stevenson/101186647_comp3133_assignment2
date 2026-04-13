@@ -1,1 +1,25 @@
-<p>employee-details works!</p>
+<div class="page">
+  <p *ngIf="loading">Loading...</p>
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+  <div class="card" *ngIf="!loading && employee">
+    <h2>Employee Details</h2>
+
+    <img
+      *ngIf="employee.employee_photo"
+      [src]="employee.employee_photo"
+      alt="Employee photo"
+      class="photo"
+    />
+
+    <p><strong>Name:</strong> {{ employee.first_name }} {{ employee.last_name }}</p>
+    <p><strong>Email:</strong> {{ employee.email }}</p>
+    <p><strong>Gender:</strong> {{ employee.gender || 'N/A' }}</p>
+    <p><strong>Designation:</strong> {{ employee.designation }}</p>
+    <p><strong>Department:</strong> {{ employee.department }}</p>
+    <p><strong>Salary:</strong> {{ employee.salary | currency }}</p>
+    <p><strong>Date of Joining:</strong> {{ employee.date_of_joining | date }}</p>
+
+    <a routerLink="/employees" class="back-btn">Back</a>
+  </div>
+</div>
