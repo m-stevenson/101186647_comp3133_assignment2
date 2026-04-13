@@ -1,12 +1,13 @@
 services:
   frontend:
+    container_name: assignment2_frontend
     build: ./frontend
     ports:
       - "4200:4200"
     volumes:
       - ./frontend:/app
       - /app/node_modules
-    command: npm start
+    command: npm start -- --host 0.0.0.0
     depends_on:
       - api
 
@@ -21,7 +22,7 @@ services:
     depends_on:
       - mongo
     volumes:
-      - .:/app
+      - ./backend:/app
       - /app/node_modules
     command: npm start
 
