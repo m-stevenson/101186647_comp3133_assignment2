@@ -1,1 +1,39 @@
-<p>signup works!</p>
+<div class="auth-container">
+  <div class="card">
+    <h2>Sign up</h2>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <label for="username">Username</label>
+      <input id="username" type="text" formControlName="username" />
+      <small *ngIf="form.get('username')?.touched && form.get('username')?.invalid">
+        Username is required
+      </small>
+
+      <label for="email">Email</label>
+      <input id="email" type="email" formControlName="email" />
+      <small *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
+        A valid email is required
+      </small>
+
+      <label for="password">Password</label>
+      <input id="password" type="password" formControlName="password" />
+      <small *ngIf="form.get('password')?.touched && form.get('password')?.invalid">
+        Password must be at least 6 characters.
+      </small>
+
+      <label for="confirmPassword">Confirm Password</label>
+      <input id="confirmPassword" type="password" formControlName="confirmPassword" />
+      <small *ngIf="form.hasError('passwordMismatch') && form.get('confirmPassword')?.touched">
+        Passwords do not match
+      </small>
+
+      <button class="btn btn-signup" type="submit" [disabled]="loading">
+        {{ loading ? 'Creating account...' : 'Sign up' }}
+      </button>
+    </form>
+
+    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+    
+    <button class="btn btn-login" routerLink="/login"><- Login</button>
+  </div>
+</div>
