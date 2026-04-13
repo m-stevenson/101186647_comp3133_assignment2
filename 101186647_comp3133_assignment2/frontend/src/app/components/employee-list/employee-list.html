@@ -4,7 +4,7 @@
 
     <div class="toolbar-actions">
       <a class="btn primary" routerLink="/employees/add"> + Add Employee</a>
-      <a class="btn delete" (click)="logout()">Logout</a>
+      <a class="btn btn-delete" (click)="logout()">Logout</a>
     </div>
   </div>
 
@@ -12,8 +12,8 @@
     <input [(ngModel)]="designation" type="text" placeholder="Search by designation" />
     <input [(ngModel)]="department" type="text" placeholder="Search by department" />
 
-    <button class="btn primary" (click)="onSearch()">Search</button>
-    <button class="btn secondary" (click)="clearSearch()">Clear</button>
+    <a class="btn primary" (click)="onSearch()">Search</a>
+    <a class="btn secondary" (click)="clearSearch()">Clear</a>
   </div>
 
   <p *ngIf="loading">Loading...</p>
@@ -53,9 +53,9 @@
           <td>{{ emp.salary | currency }}</td>
           <td>{{ emp.date_of_joining | date }}</td>
           <td>
-            <a class="btn view" [routerLink]="['/employees', emp._id]">View</a>
-            <a class="btn edit" [routerLink]="['/employees/edit', emp._id]">Edit</a>
-            <a class="btn delete" (click)="onDelete(emp._id)">Delete</a>
+            <a class="btn btn-view" [routerLink]="['/employees', emp._id]">View</a>
+            <a class="btn btn-edit" [routerLink]="['/employees/edit', emp._id]">Edit</a>
+            <a class="btn btn-delete" (click)="onDelete(emp._id)">Delete</a>
           </td>
         </tr>
       </tbody>
