@@ -1,1 +1,101 @@
-<p>employee-form works!</p>
+<div class="page">
+  <div class="card">
+    <h2>{{ isEditMode ? 'Edit Employee' : 'Add Employee' }}</h2>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="grid">
+        <div>
+          <label for="first_name">First Name</label>
+          <input id="first_name" type="text" formControlName="first_name" />
+          <small *ngIf="form.get('first_name')?.touched && form.get('first_name')?.invalid">
+            First name is required
+          </small>
+        </div>
+
+        <div>
+          <label for="last_name">Last Name</label>
+          <input id="last_name" type="text" formControlName="last_name" />
+          <small *ngIf="form.get('last_name')?.touched && form.get('last_name')?.invalid">
+            Last name is required
+          </small>
+        </div>
+
+        <div>
+          <label for="email">Email</label>
+          <input id="email" type="email" formControlName="email" />
+          <small *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
+            Email is required
+          </small>
+          <small *ngIf="form.get('email')?.touched && form.get('email')?.errors?.['email']">
+            Enter a valid email address
+          </small>
+        </div>
+
+        <div>
+          <label for="gender">Gender</label>
+          <select id="gender" formControlName="gender">
+            <option value="">Select</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="designation">Designation</label>
+          <input id="designation" type="text" formControlName="designation" />
+          <small *ngIf="form.get('designation')?.touched && form.get('designation')?.invalid">
+            Designation is required
+          </small>
+        </div>
+
+        <div>
+          <label for="salary">Salary</label>
+          <input id="salary" type="number" formControlName="salary" />
+          <small *ngIf="form.get('salary')?.touched && form.get('salary')?.errors?.['required']">
+            Salary is required
+          </small>
+          <small *ngIf="form.get('salary')?.touched && form.get('salary')?.errors?.['min']">
+            Salary cannot be negative
+          </small>
+        </div>
+
+        <div>
+          <label for="date_of_joining">Date of Joining</label>
+          <input id="date_of_joining" type="date" formControlName="date_of_joining" />
+          <small *ngIf="form.get('date_of_joining')?.touched && form.get('date_of_joining')?.invalid">
+            Date of joining is required
+          </small>
+        </div>
+
+        <div>
+          <label for="department">Department</label>
+          <input id="department" type="text" formControlName="department" />
+          <small *ngIf="form.get('department')?.touched && form.get('department')?.invalid">
+            Department is required
+          </small>
+        </div>
+
+        <div class="full-width">
+          <label for="employee_photo">Employee Photo</label>
+          <input
+            id="employee_photo"
+            type="file"
+            accept="image/*"
+            (change)="onFileSelected($event)"
+          />
+        </div>
+      </div>
+
+      <div class="buttons">
+        <button type="submit" [disabled]="loading">
+          {{ loading ? (isEditMode ? 'Updating...' : 'Adding...') : (isEditMode ? 'Update Employee' : 'Add Employee') }}
+        </button>
+
+        <a routerLink="/employees" class="cancel-btn">Cancel</a>
+      </div>
+    </form>
+
+    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+  </div>
+</div>
