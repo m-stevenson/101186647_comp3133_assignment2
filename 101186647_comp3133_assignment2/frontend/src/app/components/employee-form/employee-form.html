@@ -88,11 +88,11 @@
       </div>
 
       <div class="buttons">
-        <button type="submit" [disabled]="loading">
+        <button class="btn update-btn" type="submit" [disabled]="loading">
           {{ loading ? (isEditMode ? 'Updating...' : 'Adding...') : (isEditMode ? 'Update Employee' : 'Add Employee') }}
         </button>
 
-        <a routerLink="/employees" class="cancel-btn">Cancel</a>
+        <a routerLink="/employees" class="btn cancel-btn">Cancel</a>
       </div>
     </form>
 
