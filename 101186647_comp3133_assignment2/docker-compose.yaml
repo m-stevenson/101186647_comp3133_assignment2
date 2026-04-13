@@ -1,13 +1,4 @@
 services:
-  backend:
-    build: ./backend
-    ports:
-      - "4000:4000"
-    volumes:
-      - ./backend:/app
-      - /app/node_modules
-    command: npm run dev
-
   frontend:
     build: ./frontend
     ports:
@@ -17,4 +8,30 @@ services:
       - /app/node_modules
     command: npm start
     depends_on:
-      - backend
+      - api
+
+  api:
+    build: ./backend
+    container_name: assignment2_api
+    ports:
+      - "4000:4000"
+    environment:
+      - PORT=4000
+      - MONGO_URI=mongodb://mongo:27017/assignment2
+    depends_on:
+      - mongo
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npm start
+
+  mongo:
+    image: mongo:7
+    container_name: assignment2_mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
